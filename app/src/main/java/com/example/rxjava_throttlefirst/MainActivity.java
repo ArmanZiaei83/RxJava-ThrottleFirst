@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding4.view.RxView;
 
+import java.util.TimerTask;
+import java.util.TooManyListenersException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNext(@NonNull Unit unit) {
                         makeSout("onNext : " + String.valueOf(System.currentTimeMillis() - firstReq));
+                        makeToast("Button Clicked");
                     }
 
                     @Override
@@ -53,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
                         makeSout("<--- Completed --->");
                     }
                 });
+    }
+
+    private void makeToast(String message) {
+        Toast.makeText(this , message , Toast.LENGTH_SHORT).show();
     }
 
     private void makeSout(String message){
